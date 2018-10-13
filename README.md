@@ -1,6 +1,9 @@
 # 104-helper-userscript
 
-This script will add useful links into 104.com.tw job pages.
+This script will add useful links into 104.com.tw job pages:
+
+* Ptt (by Google)
+* Qollie
 
 ## Installation
 
