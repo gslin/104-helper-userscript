@@ -2,6 +2,7 @@
 
 This script will add useful links into 104.com.tw job pages:
 
+* Google
 * Ptt (by Google)
 * Qollie
 
