@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181013.1
+// @version     0.20181013.2
 // @license     MIT
 // ==/UserScript==
 
@@ -14,7 +14,13 @@
 
     if ('/jobbank/custjob/index.php' === pathname) {
         let company_el = document.querySelector('li.comp_name h1');
+
         let company_name = company_el.textContent.trim();
+        company_name = company_name
+            .replace(/^(英|美)商/, '')
+            .replace(/股份有限公司$/, '')
+            .replace(/有限公司$/, '')
+            .replace(/公司$/, '');
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + encodeURIComponent(company_name) + '&kind=company';
 
@@ -36,7 +42,13 @@
 
     if ('/job/' === pathname) {
         let company_el = document.querySelector('span.company a');
+
         let company_name = company_el.textContent.trim();
+        company_name = company_name
+            .replace(/^(英|美)商/, '')
+            .replace(/股份有限公司$/, '')
+            .replace(/有限公司$/, '')
+            .replace(/公司$/, '');
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + encodeURIComponent(company_name) + '&kind=company';
 
