@@ -1,5 +1,7 @@
 # 104-helper-userscript
 
+This script will add useful links into 104.com.tw job pages.
+
 ## Installation
 
 * https://greasyfork.org/en/scripts/373193-104-com-tw-helper
