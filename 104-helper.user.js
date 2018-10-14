@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181013.5
+// @version     0.20181013.6
 // @license     MIT
 // ==/UserScript==
 
@@ -35,6 +35,13 @@
         qollie_el.innerHTML = '去 Qollie 看看';
         company_el.parentElement.appendChild(qollie_el);
 
+        let ursalary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + encodeURIComponent(company_name);
+        let ursalary_el = document.createElement('a');
+        ursalary_el.setAttribute('href', ursalary_link);
+        ursalary_el.setAttribute('style', 'display: block;');
+        ursalary_el.innerHTML = '去 Ursalary 看看';
+        company_el.parentElement.appendChild(ursalary_el);
+
         let ptt_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+site:www.ptt.cc';
         let ptt_el = document.createElement('a');
         ptt_el.setAttribute('href', ptt_link);
@@ -62,6 +69,13 @@
         qollie_el.setAttribute('style', 'display: block;');
         qollie_el.innerHTML = '去 Qollie 看看';
         company_el.parentElement.parentElement.appendChild(qollie_el);
+
+        let ursalary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + encodeURIComponent(company_name);
+        let ursalary_el = document.createElement('a');
+        ursalary_el.setAttribute('href', ursalary_link);
+        ursalary_el.setAttribute('style', 'display: block;');
+        ursalary_el.innerHTML = '去 Ursalary 看看';
+        company_el.parentElement.parentElement.appendChild(ursalary_el);
 
         let ptt_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+site:www.ptt.cc';
         let ptt_el = document.createElement('a');
