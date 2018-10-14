@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181013.4
+// @version     0.20181013.5
 // @license     MIT
 // ==/UserScript==
 
@@ -13,11 +13,12 @@
     let company_name_normalize = function(name){
         return name
             .trim()
-            .replace(/^(英|美|港|香港)商/, '')
-            .replace(/股份有限公司$/, '')
-            .replace(/有限公司$/, '')
+            .replace(/^(法|英|)屬/, '')
+            .replace(/^(開曼群島|英|美|港|香港)商/, '')
             .replace(/(台|臺)灣(子|分)公司$/, '')
             .replace(/(子|分)公司$/, '')
+            .replace(/股份有限公司$/, '')
+            .replace(/有限公司$/, '')
             .replace(/公司$/, '');
     };
 
