@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181013.8
+// @version     0.20181015.0
 // @license     MIT
 // ==/UserScript==
 
@@ -36,6 +36,13 @@
         qollie_el.setAttribute('style', 'display: block;');
         qollie_el.innerHTML = '去 Qollie 看看';
         company_el.parentElement.appendChild(qollie_el);
+
+        let threesalary_link = 'https://3salary.com/search.php?keyword=' + encodeURIComponent(company_name);
+        let threesalary_el = document.createElement('a');
+        threesalary_el.setAttribute('href', threesalary_link);
+        threesalary_el.setAttribute('style', 'display: block;');
+        threesalary_el.innerHTML = '去 3Salary 看看';
+        company_el.parentElement.appendChild(threesalary_el);
 
         let ursalary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + encodeURIComponent(company_name);
         let ursalary_el = document.createElement('a');
@@ -71,6 +78,13 @@
         qollie_el.setAttribute('style', 'display: block;');
         qollie_el.innerHTML = '去 Qollie 看看';
         company_el.parentElement.parentElement.appendChild(qollie_el);
+
+        let threesalary_link = 'https://3salary.com/search.php?keyword=' + encodeURIComponent(company_name);
+        let threesalary_el = document.createElement('a');
+        threesalary_el.setAttribute('href', threesalary_link);
+        threesalary_el.setAttribute('style', 'display: block;');
+        threesalary_el.innerHTML = '去 3Salary 看看';
+        company_el.parentElement.parentElement.appendChild(threesalary_el);
 
         let ursalary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + encodeURIComponent(company_name);
         let ursalary_el = document.createElement('a');
