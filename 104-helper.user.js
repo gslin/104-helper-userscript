@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181015.0
+// @version     0.20181015.1
 // @license     MIT
 // ==/UserScript==
 
@@ -16,7 +16,7 @@
             .replace(/[/_]+/g, ' ')
             .replace(/^(台|臺)灣/, '')
             .replace(/^(法|英|)屬/, '')
-            .replace(/^(開曼群島|英|美|港|香港)商/, '')
+            .replace(/^(維京群島|開曼群島|英|美|港|香港)商/, '')
             .replace(/(台|臺)灣(子|分)公司$/, '')
             .replace(/(子|分)公司$/, '')
             .replace(/股份有限公司$/, '')
