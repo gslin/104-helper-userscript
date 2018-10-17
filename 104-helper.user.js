@@ -3,8 +3,9 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181015.3
+// @version     0.20181017.0
 // @license     MIT
+// @grant       GM_openInTab
 // ==/UserScript==
 
 (function(){
@@ -26,10 +27,18 @@
 
     let gen_el = function(url, text){
         let el = document.createElement('a');
+        el.setAttribute('class', 'helper_outbound_link');
         el.setAttribute('href', url);
         el.setAttribute('style', 'display: block;');
         el.innerHTML = text;
         return el;
+    };
+
+    let open_outbound_links = function(){
+        let links = Array.from(document.getElementsByClassName('helper_outbound_link')).reverse();
+        for (let el of links) {
+            GM_openInTab(el.getAttribute('href'), {active: false});
+        };
     };
 
     let pathname = document.location.pathname;
@@ -37,6 +46,12 @@
     if ('/jobbank/custjob/index.php' === pathname) {
         let company_el = document.querySelector('li.comp_name h1');
         let company_name = company_name_normalize(company_el.textContent);
+
+        let btn = document.createElement('button');
+        btn.addEventListener('click', open_outbound_links);
+        btn.setAttribute('style', 'display: block;');
+        btn.innerHTML = 'Open in tabs';
+        company_el.parentElement.appendChild(btn);
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + encodeURIComponent(company_name) + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看');
@@ -64,6 +79,12 @@
     if ('/job/' === pathname) {
         let company_el = document.querySelector('span.company a');
         let company_name = company_name_normalize(company_el.textContent);
+
+        let btn = document.createElement('button');
+        btn.addEventListener('click', open_outbound_links);
+        btn.setAttribute('style', 'display: block;');
+        btn.innerHTML = 'Open in tabs';
+        company_el.parentElement.parentElement.appendChild(btn);
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + encodeURIComponent(company_name) + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看');
