@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181017.0
+// @version     0.20181017.2
 // @license     MIT
 // @grant       GM_openInTab
 // ==/UserScript==
@@ -15,7 +15,6 @@
         return name
             .trim()
             .replace(/[/_]+/g, ' ')
-            .replace(/^(台|臺)灣/, '')
             .replace(/^(法|英|)屬/, '')
             .replace(/^(維京群島|開曼群島|薩摩亞|英|美|港|香港)商/, '')
             .replace(/(台|臺)灣(子|分)公司$/, '')
@@ -69,7 +68,7 @@
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (by Google)');
         company_el.parentElement.appendChild(ptt_el);
 
-        let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+面試';
+        let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+面試+-site:104.com.tw';
         let google_el = gen_el(google_link, '去 Google 看看');
         company_el.parentElement.appendChild(google_el);
 
@@ -102,7 +101,7 @@
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (by Google)');
         company_el.parentElement.parentElement.appendChild(ptt_el);
 
-        let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+面試';
+        let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+面試+-site:104.com.tw';
         let google_el = gen_el(google_link, '去 Google 看看');
         company_el.parentElement.parentElement.appendChild(google_el);
 
