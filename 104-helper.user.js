@@ -88,7 +88,7 @@
         let addr = document.querySelector('dd.addr');
         if (addr) {
             let location_el = document.createElement('span');
-            location_el.innerHTML = encodeURIComponent(addr.childNodes[0].textContent);
+            location_el.textContent = addr.childNodes[0].textContent;
             base_node.appendChild(location_el);
         }
 
