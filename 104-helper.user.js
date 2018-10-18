@@ -75,13 +75,6 @@
         let company_name = company_name_normalize(company_el.textContent);
         let base_node = company_el.parentElement;
 
-        let addr = document.querySelector('dd.addr');
-        if (addr) {
-            let location_el = document.createElement('span');
-            location_el.innerHTML = addr.childNodes[0].textContent;
-            base_node.appendChild(location_el);
-        }
-
         append_links(base_node, company_name);
 
         return;
