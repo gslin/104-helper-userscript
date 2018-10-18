@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181018.4
+// @version     0.20181018.5
 // @license     MIT
 // @grant       GM_openInTab
 // ==/UserScript==
@@ -30,11 +30,11 @@
         let ursalary_el = gen_el(ursalary_link, '去 Ursalary 看看');
         base_node.appendChild(ursalary_el);
 
-        let ptt_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+site:www.ptt.cc';
+        let ptt_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+~面試+site:www.ptt.cc';
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (by Google)');
         base_node.appendChild(ptt_el);
 
-        let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+面試+-site:104.com.tw';
+        let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+~面試+-site:104.com.tw+-site:www.ptt.cc';
         let google_el = gen_el(google_link, '去 Google 看看');
         base_node.appendChild(google_el);
     };
