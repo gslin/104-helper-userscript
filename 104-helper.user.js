@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181018.3
+// @version     0.20181018.4
 // @license     MIT
 // @grant       GM_openInTab
 // ==/UserScript==
@@ -88,7 +88,7 @@
         let addr = document.querySelector('dd.addr');
         if (addr) {
             let location_el = document.createElement('span');
-            location_el.innerHTML = addr.childNodes[0].textContent;
+            location_el.innerHTML = encodeURIComponent(addr.childNodes[0].textContent);
             base_node.appendChild(location_el);
         }
 
