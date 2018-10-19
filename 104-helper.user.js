@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181019.1
+// @version     0.20181020.0
 // @license     MIT
 // @grant       GM_openInTab
 // ==/UserScript==
@@ -17,6 +17,10 @@
         btn.setAttribute('style', 'display: block;');
         btn.innerHTML = 'Open in tabs';
         base_node.appendChild(btn);
+
+        let company_link = 'https://company.g0v.ronny.tw/index/search?q=' + encodeURIComponent(company_name);
+        let company_el = gen_el(company_link, '去台灣公司資料看看 (company.g0v.ronny.tw)');
+        base_node.appendChild(company_el);
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + encodeURIComponent(company_name) + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
