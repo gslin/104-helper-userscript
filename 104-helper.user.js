@@ -19,23 +19,23 @@
         base_node.appendChild(btn);
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + encodeURIComponent(company_name) + '&kind=company';
-        let qollie_el = gen_el(qollie_link, '去 Qollie 看看');
+        let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
         base_node.appendChild(qollie_el);
 
         let threesalary_link = 'https://3salary.com/search.php?keyword=' + encodeURIComponent(company_name);
-        let threesalary_el = gen_el(threesalary_link, '去 3Salary 看看');
+        let threesalary_el = gen_el(threesalary_link, '去 3Salary 看看 (3salary.com) ');
         base_node.appendChild(threesalary_el);
 
         let ursalary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + encodeURIComponent(company_name);
-        let ursalary_el = gen_el(ursalary_link, '去 Ursalary 看看');
+        let ursalary_el = gen_el(ursalary_link, '去 Ursalary 看看 (ursalary.com)');
         base_node.appendChild(ursalary_el);
 
         let ptt_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+~面試+site:www.ptt.cc';
-        let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (by Google)');
+        let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
         base_node.appendChild(ptt_el);
 
         let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+~面試+-site:104.com.tw+-site:www.ptt.cc';
-        let google_el = gen_el(google_link, '去 Google 看看');
+        let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
         base_node.appendChild(google_el);
     };
 
