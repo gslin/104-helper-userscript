@@ -3,9 +3,10 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181020.1
+// @version     0.20181021.0
 // @license     MIT
 // @grant       GM_openInTab
+// @grant       unsafeWindow
 // ==/UserScript==
 
 (function(){
@@ -13,10 +14,13 @@
 
     let append_links = function(base_node, company_name){
         let btn = document.createElement('button');
-        btn.addEventListener('click', open_outbound_links, false);
         btn.setAttribute('class', 'btn_open_helper_links');
         btn.setAttribute('style', 'display: block;');
         btn.innerHTML = '打開以下連結 (tabs)';
+
+        // Special workaround for 求職小幫手
+        btn.setAttribute('onclick', "open_helper_outbound_links();");
+
         base_node.appendChild(btn);
 
         let company_link = 'https://company.g0v.ronny.tw/index/search?q=' + encodeURIComponent(company_name);
@@ -66,7 +70,8 @@
         return el;
     };
 
-    let open_outbound_links = function(){
+    // Special workaround for 求職小幫手
+    unsafeWindow.open_helper_outbound_links = function(){
         let links = Array.from(document.getElementsByClassName('helper_outbound_link')).reverse();
         for (let el of links) {
             GM_openInTab(el.getAttribute('href'), {active: false});
