@@ -13,6 +13,8 @@
     'use strict';
 
     let append_links = function(base_node, company_name){
+        let company_name_norm = company_name_normalize(company_name);
+
         let btn = document.createElement('button');
         btn.setAttribute('class', 'btn_open_helper_links');
         btn.setAttribute('style', 'display: block;');
@@ -23,27 +25,27 @@
 
         base_node.appendChild(btn);
 
-        let company_link = 'https://company.g0v.ronny.tw/index/search?q=' + encodeURIComponent(company_name);
+        let company_link = 'https://company.g0v.ronny.tw/index/search?q=' + encodeURIComponent(company_name_norm);
         let company_el = gen_el(company_link, '去台灣公司資料看看 (company.g0v.ronny.tw)');
         base_node.appendChild(company_el);
 
-        let qollie_link = 'https://www.qollie.com/search?keyword=' + encodeURIComponent(company_name) + '&kind=company';
+        let qollie_link = 'https://www.qollie.com/search?keyword=' + encodeURIComponent(company_name_norm) + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
         base_node.appendChild(qollie_el);
 
-        let threesalary_link = 'https://3salary.com/search.php?keyword=' + encodeURIComponent(company_name);
+        let threesalary_link = 'https://3salary.com/search.php?keyword=' + encodeURIComponent(company_name_norm);
         let threesalary_el = gen_el(threesalary_link, '去 3Salary 看看 (3salary.com) ');
         base_node.appendChild(threesalary_el);
 
-        let ursalary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + encodeURIComponent(company_name);
+        let ursalary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + encodeURIComponent(company_name_norm);
         let ursalary_el = gen_el(ursalary_link, '去 Ursalary 看看 (ursalary.com)');
         base_node.appendChild(ursalary_el);
 
-        let ptt_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+~面試+site:www.ptt.cc';
+        let ptt_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name_norm) + '+~面試+site:www.ptt.cc';
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
         base_node.appendChild(ptt_el);
 
-        let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name) + '+~面試+-site:104.com.tw+-site:www.ptt.cc';
+        let google_link = 'https://www.google.com/search?q=' + encodeURIComponent(company_name_norm) + '+~面試+-site:104.com.tw+-site:www.ptt.cc';
         let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
         base_node.appendChild(google_el);
     };
@@ -82,7 +84,7 @@
 
     if ('/jobbank/custjob/index.php' === pathname) {
         let company_el = document.querySelector('li.comp_name h1');
-        let company_name = company_name_normalize(company_el.textContent);
+        let company_name = company_el.textContent;
         let base_node = company_el.parentElement;
 
         append_links(base_node, company_name);
@@ -92,7 +94,7 @@
 
     if ('/job/' === pathname) {
         let company_el = document.querySelector('span.company a');
-        let company_name = company_name_normalize(company_el.textContent);
+        let company_name = company_el.textContent;
         let base_node = company_el.parentElement.parentElement;
 
         let addr = document.querySelector('dd.addr');
