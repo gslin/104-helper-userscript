@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181021.0
+// @version     0.20181022.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       unsafeWindow
@@ -51,8 +51,9 @@
     };
 
     let company_name_normalize = function(name){
-        return name
-            .trim()
+        name = name.trim()
+            .replace(/[\(\).A-Za-z]+/g, ' ');
+        name = name.trim()
             .replace(/[/_]+/g, ' ')
             .replace(/^(法|英|)屬/, '')
             .replace(/^(維京群島|開曼群島|薩摩亞|塞席爾|賽席爾|澳大利亞|英|美|港|香港)商/, '')
@@ -61,6 +62,7 @@
             .replace(/股份有限公司$/, '')
             .replace(/有限公司$/, '')
             .replace(/公司$/, '');
+        return name.trim();
     };
 
     let gen_el = function(url, text){
