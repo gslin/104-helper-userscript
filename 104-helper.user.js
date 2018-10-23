@@ -107,7 +107,7 @@
 
     if ('/jobbank/custjob/index.php' === pathname) {
         let company_el = document.querySelector('li.comp_name h1');
-        let company_name = company_el.textContent;
+        let company_name = company_el.textContent.trim();
         let base_node = company_el.parentElement;
 
         append_links(base_node, company_name);
@@ -117,7 +117,7 @@
 
     if ('/job/' === pathname) {
         let company_el = document.querySelector('span.company a');
-        let company_name = company_el.textContent;
+        let company_name = company_el.textContent.trim();
         let base_node = company_el.parentElement.parentElement;
 
         let addr = document.querySelector('dd.addr');
