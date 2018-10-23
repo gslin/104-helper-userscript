@@ -95,6 +95,21 @@
         return el;
     };
 
+    let verify_hh = function(node, company_name){
+        let hh_list = [
+            '台灣米高蒲志國際股份有限公司',
+            '新加坡商艾得克有限公司台灣分公司',
+            '經緯智庫股份有限公司 (MGR Consulting Co., Ltd.)',
+        ];
+
+        if (hh_list.indexOf(company_name) >= 0) {
+            let el = document.createElement('div');
+            el.setAttribute('style', 'color: darkred;');
+            el.innerHTML = '(Company in HeadHunter List)';
+            node.appendChild(el);
+        }
+    };
+
     // Special workaround for 求職小幫手
     unsafeWindow.open_helper_outbound_links = function(){
         let links = Array.from(document.getElementsByClassName('helper_outbound_link')).reverse();
@@ -110,6 +125,7 @@
         let company_name = company_el.textContent.trim();
         let base_node = company_el.parentElement;
 
+        verify_hh(base_node, company_name);
         append_links(base_node, company_name);
 
         return;
@@ -119,6 +135,8 @@
         let company_el = document.querySelector('span.company a');
         let company_name = company_el.textContent.trim();
         let base_node = company_el.parentElement.parentElement;
+
+        verify_hh(base_node, company_name);
 
         let addr = document.querySelector('dd.addr');
         if (addr) {
