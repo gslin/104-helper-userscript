@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181023.3
+// @version     0.20181023.4
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       unsafeWindow
@@ -68,15 +68,15 @@
 
     let get_company_name_chinese = function(name){
         name = name.trim()
-            .replace(/[\(\)\/.A-Z_a-z]+/g, ' ');
+            .replace(/[\/_]+/g, ' ')
+            .replace(/[^ ]*[0-9.A-Z_a-z]+[^ ]*/g, ' ');
         return name.trim();
     };
 
     let get_company_name_short = function(name){
         name = get_company_name_chinese(name);
         name = name.trim()
-            .replace(/[\/_]+/g, ' ')
-            .replace(/^(法|英|)屬/, '')
+            .replace(/^(法|英)屬/, '')
             .replace(/^(維京群島|開曼群島|薩摩亞|塞席爾|賽席爾|澳大利亞|英|美|港|香港|瑞士)商/, '')
             .replace(/(台|臺)灣(子|分)公司$/, '')
             .replace(/(子|分)公司$/, '')
