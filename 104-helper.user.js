@@ -12,7 +12,7 @@
 (function(){
     'use strict';
 
-    let append_links = function(base_node, company_name){
+    let append_links = function(node, company_name){
         let company_name_chinese = get_company_name_chinese(company_name);
         let company_name_chinese_encoded = encodeURIComponent(company_name_chinese);
 
@@ -27,43 +27,43 @@
         // Special workaround for 求職小幫手
         btn.setAttribute('onclick', "open_helper_outbound_links();");
 
-        base_node.appendChild(btn);
+        node.appendChild(btn);
 
         let company_link = 'https://company.g0v.ronny.tw/index/search?q=' + company_name_chinese_encoded;
         let company_el = gen_el(company_link, '去台灣公司資料看看 (company.g0v.ronny.tw)');
-        base_node.appendChild(company_el);
+        node.appendChild(company_el);
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_encoded + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
-        base_node.appendChild(qollie_el);
+        node.appendChild(qollie_el);
 
         let threesalary_link = 'https://3salary.com/search.php?keyword=' + company_name_chinese_encoded;
         let threesalary_el = gen_el(threesalary_link, '去 3Salary 看看 (3salary.com) ');
-        base_node.appendChild(threesalary_el);
+        node.appendChild(threesalary_el);
 
         let ursalary_salary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + company_name_chinese_encoded;
         let ursalary_salary_el = gen_el(ursalary_salary_link, '去 Ursalary (Salary) 看看 (ursalary0.com)');
-        base_node.appendChild(ursalary_salary_el);
+        node.appendChild(ursalary_salary_el);
 
         let ursalary_interview_link = 'http://ursalary0.com/statisfactions/statisfaction_lists_tw/q:' + company_name_chinese_encoded;
         let ursalary_interview_el = gen_el(ursalary_interview_link, '去 Ursalary (Interview) 看看 (ursalary0.com)');
-        base_node.appendChild(ursalary_interview_el);
+        node.appendChild(ursalary_interview_el);
 
         let ursalary_law_link = 'http://ursalary0.com/lows/low_lists_tw/q:' + company_name_chinese_encoded;
         let ursalary_law_el = gen_el(ursalary_law_link, '去 Ursalary (Law) 看看 (ursalary0.com)');
-        base_node.appendChild(ursalary_law_el);
+        node.appendChild(ursalary_law_el);
 
         let ursalary_qa_link = 'http://ursalary0.com/topics/topic_lists_tw/q:' + company_name_chinese_encoded;
         let ursalary_qa_el = gen_el(ursalary_qa_link, '去 Ursalary (QA) 看看 (ursalary0.com)');
-        base_node.appendChild(ursalary_qa_el);
+        node.appendChild(ursalary_qa_el);
 
         let ptt_link = 'https://www.google.com/search?q=' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
-        base_node.appendChild(ptt_el);
+        node.appendChild(ptt_el);
 
         let google_link = 'https://www.google.com/search?q=' + company_name_chinese_encoded + '+~面試+-site:104.com.tw+-site:www.ptt.cc';
         let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
-        base_node.appendChild(google_el);
+        node.appendChild(google_el);
     };
 
     let get_company_name_chinese = function(name){
