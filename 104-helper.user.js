@@ -3,16 +3,18 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181024.1
+// @version     0.20181025.0
 // @license     MIT
 // @grant       GM_openInTab
+// @grant       GM_xmlhttpRequest
 // @grant       unsafeWindow
+// @connect     findbiz.nat.gov.tw
 // ==/UserScript==
 
 (function(){
     'use strict';
 
-    let append_links = function(node, company_name){
+    let append_links = async function(node, company_name){
         let company_name_chinese = get_company_name_chinese(company_name);
         let company_name_chinese_encoded = encodeURIComponent(company_name_chinese);
 
@@ -28,6 +30,40 @@
         btn.setAttribute('onclick', "open_helper_outbound_links();");
 
         node.appendChild(btn);
+
+        try {
+            let res = await (function(){
+                let p = new Promise(function(resolve){
+                    let data = 'qryCond=' + company_name_chinese_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
+
+                    let req = GM_xmlhttpRequest({
+                        method: 'POST',
+                        url: 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Referer': 'https://findbiz.nat.gov.tw/fts/query/QueryBar/queryInit.do',
+                        },
+                        data: data,
+                        onload: function(res){
+                            resolve(res);
+                        },
+                    });
+                });
+
+                return p;
+            })();
+
+            let findbiz_body = document.implementation.createHTMLDocument('');
+            findbiz_body.documentElement.innerHTML = res.responseText;
+
+            let findbiz_link = findbiz_body.querySelector('.companyName.panel-heading a').getAttribute('href');
+            if (findbiz_link.startsWith('/fts')) {
+                findbiz_link = 'https://findbiz.nat.gov.tw' + findbiz_link;
+            }
+            let findbiz_el = gen_el(findbiz_link, '去經濟部商業司看看 (findbiz.nat.gov.tw，需要額外設定 Referer)');
+            node.appendChild(findbiz_el);
+        } catch (e) {
+        }
 
         let company_link = 'https://company.g0v.ronny.tw/index/search?q=' + company_name_chinese_encoded;
         let company_el = gen_el(company_link, '去台灣公司資料看看 (company.g0v.ronny.tw)');
