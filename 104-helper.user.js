@@ -98,8 +98,11 @@
     let verify_hh = function(node, company_name){
         let hh_list = [
             '台灣米高蒲志國際股份有限公司',
+            '台灣英創管理顧問股份有限公司',
             '新加坡商艾得克有限公司台灣分公司',
             '經緯智庫股份有限公司 (MGR Consulting Co., Ltd.)',
+            '萬寶華企業管理顧問股份有限公司',
+            '藝珂人事顧問股份有限公司',
         ];
 
         if (hh_list.indexOf(company_name) >= 0) {
