@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181025.5
+// @version     0.20181025.6
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -39,16 +39,17 @@
                 let data = 'qryCond=' + company_name_chinese_rtrim_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
 
                 let req = GM_xmlhttpRequest({
-                    method: 'POST',
-                    url: 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do',
+                    anonymous: true,
+                    data: data,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Referer': 'https://findbiz.nat.gov.tw/fts/query/QueryBar/queryInit.do',
                     },
-                    data: data,
+                    method: 'POST',
                     onload: function(res){
                         resolve(res);
                     },
+                    url: 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do',
                 });
             });
 
