@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181025.3
+// @version     0.20181025.4
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -58,12 +58,13 @@
         let findbiz_body = document.implementation.createHTMLDocument('');
         findbiz_body.documentElement.innerHTML = res.responseText;
 
+        let el = document.createElement('p');
+        el.setAttribute('style', 'background: #ddd;');
+        el.innerHTML = '<h2 style="display: inline-block; margin: 9px;">經濟部商業司資料：</h2>';
         for (let item of findbiz_body.querySelectorAll('.panel.panel-default')) {
-            let el = document.createElement('p');
-            el.setAttribute('style', 'background: #ddd;');
             el.appendChild(item);
-            node.appendChild(el);
         }
+        node.appendChild(el);
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
