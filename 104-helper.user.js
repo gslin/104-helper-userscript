@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181025.0
+// @version     0.20181025.1
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -31,43 +31,36 @@
 
         node.appendChild(btn);
 
-        try {
-            let res = await (function(){
-                let p = new Promise(function(resolve){
-                    let data = 'qryCond=' + company_name_chinese_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
+        let res = await (function(){
+            let p = new Promise(function(resolve){
+                let data = 'qryCond=' + company_name_chinese_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
 
-                    let req = GM_xmlhttpRequest({
-                        method: 'POST',
-                        url: 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'Referer': 'https://findbiz.nat.gov.tw/fts/query/QueryBar/queryInit.do',
-                        },
-                        data: data,
-                        onload: function(res){
-                            resolve(res);
-                        },
-                    });
+                let req = GM_xmlhttpRequest({
+                    method: 'POST',
+                    url: 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Referer': 'https://findbiz.nat.gov.tw/fts/query/QueryBar/queryInit.do',
+                    },
+                    data: data,
+                    onload: function(res){
+                        resolve(res);
+                    },
                 });
+            });
 
-                return p;
-            })();
+            return p;
+        })();
 
-            let findbiz_body = document.implementation.createHTMLDocument('');
-            findbiz_body.documentElement.innerHTML = res.responseText;
+        let findbiz_body = document.implementation.createHTMLDocument('');
+        findbiz_body.documentElement.innerHTML = res.responseText;
 
-            let findbiz_link = findbiz_body.querySelector('.companyName.panel-heading a').getAttribute('href');
-            if (findbiz_link.startsWith('/fts')) {
-                findbiz_link = 'https://findbiz.nat.gov.tw' + findbiz_link;
-            }
-            let findbiz_el = gen_el(findbiz_link, '去經濟部商業司看看 (findbiz.nat.gov.tw，需要額外設定 Referer)');
-            node.appendChild(findbiz_el);
-        } catch (e) {
+        for (let item of findbiz_body.querySelectorAll('.panel.panel-default')) {
+            let el = document.createElement('p');
+            el.setAttribute('style', 'background: #ddd;');
+            el.textContent = '(經濟部商業司)' + item.textContent;
+            node.appendChild(el);
         }
-
-        let company_link = 'https://company.g0v.ronny.tw/index/search?q=' + company_name_chinese_encoded;
-        let company_el = gen_el(company_link, '去台灣公司資料看看 (company.g0v.ronny.tw)');
-        node.appendChild(company_el);
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_encoded + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
@@ -176,13 +169,14 @@
     if ('/job/' === pathname) {
         let company_el = document.querySelector('span.company a');
         let company_name = company_el.textContent.trim();
-        let base_node = company_el.parentElement.parentElement;
+        let base_node = company_el.parentElement.parentElement.parentElement;
 
         verify_hh(base_node, company_name);
 
         let addr = document.querySelector('dd.addr');
         if (addr) {
-            let location_el = document.createElement('span');
+            let location_el = document.createElement('p');
+            location_el.setAttribute('style', 'clear: both;');
             location_el.textContent = addr.childNodes[0].textContent;
             base_node.appendChild(location_el);
         }
