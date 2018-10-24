@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181025.1
+// @version     0.20181025.2
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -17,6 +17,9 @@
     let append_links = async function(node, company_name){
         let company_name_chinese = get_company_name_chinese(company_name);
         let company_name_chinese_encoded = encodeURIComponent(company_name_chinese);
+
+        let company_name_chinese_rtrim = get_company_name_chinese_rtrim(company_name);
+        let company_name_chinese_rtrim_encoded = encodeURIComponent(company_name_chinese_rtrim);
 
         let company_name_shorted = get_company_name_short(company_name);
         let company_name_shorted_encoded = encodeURIComponent(company_name_shorted);
@@ -33,7 +36,7 @@
 
         let res = await (function(){
             let p = new Promise(function(resolve){
-                let data = 'qryCond=' + company_name_chinese_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
+                let data = 'qryCond=' + company_name_chinese_rtrim_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
 
                 let req = GM_xmlhttpRequest({
                     method: 'POST',
@@ -62,27 +65,27 @@
             node.appendChild(el);
         }
 
-        let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_encoded + '&kind=company';
+        let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
         node.appendChild(qollie_el);
 
-        let threesalary_link = 'https://3salary.com/search.php?keyword=' + company_name_chinese_encoded;
+        let threesalary_link = 'https://3salary.com/search.php?keyword=' + company_name_chinese_rtrim_encoded;
         let threesalary_el = gen_el(threesalary_link, '去 3Salary 看看 (3salary.com) ');
         node.appendChild(threesalary_el);
 
-        let ursalary_salary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + company_name_chinese_encoded;
+        let ursalary_salary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + company_name_chinese_rtrim_encoded;
         let ursalary_salary_el = gen_el(ursalary_salary_link, '去 Ursalary (Salary) 看看 (ursalary0.com)');
         node.appendChild(ursalary_salary_el);
 
-        let ursalary_interview_link = 'http://ursalary0.com/statisfactions/statisfaction_lists_tw/q:' + company_name_chinese_encoded;
+        let ursalary_interview_link = 'http://ursalary0.com/statisfactions/statisfaction_lists_tw/q:' + company_name_chinese_rtrim_encoded;
         let ursalary_interview_el = gen_el(ursalary_interview_link, '去 Ursalary (Interview) 看看 (ursalary0.com)');
         node.appendChild(ursalary_interview_el);
 
-        let ursalary_law_link = 'http://ursalary0.com/lows/low_lists_tw/q:' + company_name_chinese_encoded;
+        let ursalary_law_link = 'http://ursalary0.com/lows/low_lists_tw/q:' + company_name_chinese_rtrim_encoded;
         let ursalary_law_el = gen_el(ursalary_law_link, '去 Ursalary (Law) 看看 (ursalary0.com)');
         node.appendChild(ursalary_law_el);
 
-        let ursalary_qa_link = 'http://ursalary0.com/topics/topic_lists_tw/q:' + company_name_chinese_encoded;
+        let ursalary_qa_link = 'http://ursalary0.com/topics/topic_lists_tw/q:' + company_name_chinese_rtrim_encoded;
         let ursalary_qa_el = gen_el(ursalary_qa_link, '去 Ursalary (QA) 看看 (ursalary0.com)');
         node.appendChild(ursalary_qa_el);
 
@@ -103,6 +106,14 @@
             .trim()
             .replace(/.* /g, '');
         return name.trim();
+    };
+
+    let get_company_name_chinese_rtrim = function(name){
+        name = get_company_name_chinese(name);
+        name = name.trim()
+            .replace(/(台|臺)灣(子|分)公司$/, '')
+            .replace(/(子|分)公司$/, '');
+        return name;
     };
 
     let get_company_name_short = function(name){
