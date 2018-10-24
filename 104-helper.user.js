@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181023.5
+// @version     0.20181024.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       unsafeWindow
@@ -69,7 +69,8 @@
     let get_company_name_chinese = function(name){
         name = name.trim()
             .replace(/[\/_]+/g, ' ')
-            .replace(/[^ ]*[0-9.A-Z_a-z]+[^ ]*/g, ' ');
+            .replace(/[^ ]*[0-9.A-Z_a-z]+[^ ]*/g, ' ')
+            .replace(/.* /g, '');
         return name.trim();
     };
 
