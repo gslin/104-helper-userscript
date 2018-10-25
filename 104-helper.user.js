@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181025.8
+// @version     0.20181025.9
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -59,8 +59,8 @@
         let findbiz_body = document.implementation.createHTMLDocument('');
         findbiz_body.documentElement.innerHTML = res.responseText;
 
-        let el = document.createElement('p');
-        el.setAttribute('style', 'background: #ddd;');
+        let el = document.createElement('div');
+        el.setAttribute('style', 'background: #ddd; margin: 9px 0;');
         el.innerHTML = '<h2 style="display: inline-block; margin: 9px;">經濟部商業司資料：</h2>';
         for (let item of findbiz_body.querySelectorAll('.panel.panel-default')) {
             let matches = [];
