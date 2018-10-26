@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181026.0
+// @version     0.20181026.1
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -127,6 +127,7 @@
         name = get_company_name_chinese(name);
         name = name.trim()
             .replace(/(台|臺)灣(子|分)公司$/, '')
+            .replace(/(台|臺)灣辦事處$/, '')
             .replace(/(子|分)公司$/, '');
         return name;
     };
