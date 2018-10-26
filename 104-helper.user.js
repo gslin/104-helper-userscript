@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181025.9
+// @version     0.20181026.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -183,7 +183,7 @@
 
     if ('/jobbank/custjob/index.php' === pathname) {
         let company_el = document.querySelector('li.comp_name h1');
-        let company_name = company_el.textContent.trim();
+        let company_name = company_el.childNodes[0].textContent.trim();
         let base_node = company_el.parentElement;
 
         verify_hh(base_node, company_name);
