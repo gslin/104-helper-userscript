@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181027.6
+// @version     0.20181027.7
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -165,6 +165,7 @@
         let hh_list = [
             '台灣米高蒲志國際股份有限公司',
             '台灣英創管理顧問股份有限公司',
+            '寶華人力資源顧問股份有限公司',
             '新加坡商立可人事顧問有限公司台灣分公司',
             '新加坡商艾得克有限公司台灣分公司',
             '經緯智庫股份有限公司 (MGR Consulting Co., Ltd.)',
