@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181027.1
+// @version     0.20181027.2
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -193,7 +193,12 @@
 
         let company_el = document.querySelector('li.comp_name h1');
         let company_name = company_el.childNodes[0].textContent.trim();
-        let base_node = company_el.parentElement;
+
+        let base_node = document.createElement('div');
+        base_node.setAttribute('style', 'clear: both; display: table; margin: 0 2em;');
+
+        let anchor_el = document.querySelector('#a_top');
+        anchor_el.parentElement.insertBefore(base_node, anchor_el);
 
         verify_hh(base_node, company_name);
         append_links(base_node, company_name);
@@ -206,7 +211,12 @@
 
         let company_el = document.querySelector('span.company a');
         let company_name = company_el.textContent.trim();
-        let base_node = company_el.parentElement.parentElement.parentElement;
+
+        let base_node = document.createElement('div');
+        base_node.setAttribute('style', 'clear: both; display: table; margin: 0 1em;');
+
+        let anchor_el = document.querySelector('.holder');
+        anchor_el.parentElement.insertBefore(base_node, anchor_el);
 
         verify_hh(base_node, company_name);
 
