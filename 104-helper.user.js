@@ -30,7 +30,7 @@
         btn.innerHTML = '打開以下連結 (tabs)';
 
         // Special workaround for 求職小幫手
-        btn.setAttribute('onclick', "open_helper_outbound_links();");
+        btn.setAttribute('onclick', 'open_helper_outbound_links();');
 
         node.appendChild(btn);
 
