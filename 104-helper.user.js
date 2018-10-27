@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181027.8
+// @version     0.20181027.9
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -108,7 +108,22 @@
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
         node.appendChild(ptt_el);
 
-        let google_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+-site:104.com.tw+-site:1111.com.tw+-site:518.com.tw+-site:indeed.com+-site:interview.tw+-site:salary.tw+-site:wajob.cc+-site:www.ptt.cc+-site:yes123.com.tw+-site:yourator.co';
+        let google_blacklist = [
+            '104.com.tw',
+            '1111.com.tw',
+            '518.com.tw',
+            'indeed.com',
+            'interview.tw',
+            'salary.tw',
+            'wajob.cc',
+            'www.ptt.cc',
+            'yes123.com.tw',
+            'yourator.co',
+        ];
+        let google_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試';
+        for (let site of google_blacklist) {
+            google_link += '+-site:' + site;
+        }
         let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
         node.appendChild(google_el);
     };
