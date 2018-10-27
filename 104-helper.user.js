@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181027.2
+// @version     0.20181027.3
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -104,11 +104,11 @@
         let ursalary_qa_el = gen_el(ursalary_qa_link, '去 Ursalary (QA) 看看 (ursalary0.com)');
         node.appendChild(ursalary_qa_el);
 
-        let ptt_link = 'https://www.google.com/search?q=' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
+        let ptt_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
         node.appendChild(ptt_el);
 
-        let google_link = 'https://www.google.com/search?q=' + company_name_chinese_encoded + '+~面試+-site:104.com.tw+-site:www.ptt.cc';
+        let google_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+-site:104.com.tw+-site:1111.com.tw+-site:518.com.tw+-site:interview.tw+-site:salary.tw+-site:www.ptt.cc+-site:yes123.com.tw';
         let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
         node.appendChild(google_el);
     };
