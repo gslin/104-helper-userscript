@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181027.0
+// @version     0.20181027.1
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -156,7 +156,7 @@
 
     let initial_css = function(){
         let el = document.createElement('style');
-        el.innerHTML = '.helper_outbound_link { display: block; }';
+        el.innerHTML = '.helper_outbound_link { clear: both; float: left; }';
         document.querySelector('head').appendChild(el);
     };
 
