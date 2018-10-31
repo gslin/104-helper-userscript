@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181031.2
+// @version     0.20181031.3
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -84,6 +84,26 @@
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
         node.appendChild(ptt_el);
 
+        let google_blacklist = [
+            '104.com.tw',
+            '1111.com.tw',
+            '518.com.tw',
+            'cakeresume.com',
+            'indeed.com',
+            'interview.tw',
+            'salary.tw',
+            'wajob.cc',
+            'www.ptt.cc',
+            'yes123.com.tw',
+            'yourator.co',
+        ];
+        let google_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試';
+        for (let site of google_blacklist) {
+            google_link += '+-site:' + site;
+        }
+        let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
+        node.appendChild(google_el);
+
         let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
         node.appendChild(qollie_el);
@@ -107,26 +127,6 @@
         let ursalary_qa_link = 'http://ursalary0.com/topics/topic_lists_tw/q:' + company_name_chinese_rtrim_encoded;
         let ursalary_qa_el = gen_el(ursalary_qa_link, '去 Ursalary (QA) 看看 (ursalary0.com)');
         node.appendChild(ursalary_qa_el);
-
-        let google_blacklist = [
-            '104.com.tw',
-            '1111.com.tw',
-            '518.com.tw',
-            'cakeresume.com',
-            'indeed.com',
-            'interview.tw',
-            'salary.tw',
-            'wajob.cc',
-            'www.ptt.cc',
-            'yes123.com.tw',
-            'yourator.co',
-        ];
-        let google_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試';
-        for (let site of google_blacklist) {
-            google_link += '+-site:' + site;
-        }
-        let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
-        node.appendChild(google_el);
     };
 
     let get_company_name_chinese = function(name){
