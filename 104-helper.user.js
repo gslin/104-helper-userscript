@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181102.0
+// @version     0.20181105.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -144,6 +144,7 @@
         name = name.trim()
             .replace(/(台|臺)灣(子|分)公司$/, '')
             .replace(/(台|臺)灣辦事處$/, '')
+            .replace(/公司.*(子|分)公司$/, '公司')
             .replace(/(子|分)公司$/, '');
         return name;
     };
@@ -156,6 +157,7 @@
             .replace(/^(維京群島|開曼群島|澳大利亞|馬來西亞|薩摩亞|塞席爾|賽席爾|新加坡|香港|瑞士|汶萊|英|美|港|日)商/, '')
             .replace(/(台|臺)灣(子|分)公司$/, '')
             .replace(/(台|臺)灣辦事處$/, '')
+            .replace(/公司.*(子|分)公司$/, '公司')
             .replace(/(子|分)公司$/, '')
             .replace(/股份有限公司$/, '')
             .replace(/有限公司$/, '')
