@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181112.0
+// @version     0.20181113.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -189,6 +189,7 @@
             '新加坡商立可人事顧問有限公司台灣分公司',
             '新加坡商艾得克有限公司台灣分公司',
             '經緯智庫股份有限公司 (MGR Consulting Co., Ltd.)',
+            '聚賢亞洲有限公司',
             '萬寶華企業管理顧問股份有限公司',
             '藝珂人事顧問股份有限公司',
         ];
