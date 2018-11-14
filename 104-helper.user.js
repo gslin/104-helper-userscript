@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20181113.0
+// @version     0.20181114.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -182,6 +182,7 @@
     let verify_hh = function(node, company_name){
         let hh_list = [
             'Morgan Philips Hong Kong Limited Taiwan Branch_香港商博禹國際顧問有限公司台灣分公司',
+            '保聖那管理顧問股份有限公司',
             '全球人事顧問股份有限公司',
             '台灣米高蒲志國際股份有限公司',
             '台灣英創管理顧問股份有限公司',
