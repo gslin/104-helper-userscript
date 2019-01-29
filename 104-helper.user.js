@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190125.0
+// @version     0.20190130.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -87,6 +87,7 @@
         let google_blacklist = [
             '104.com.tw',
             '1111.com.tw',
+            '3salary.com',
             '518.com.tw',
             'cakeresume.com',
             'indeed.com',
