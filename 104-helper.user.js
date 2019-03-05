@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190218.0
+// @version     0.20190306.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -112,22 +112,6 @@
         let threesalary_link = 'https://3salary.com/search.php?keyword=' + company_name_chinese_rtrim_encoded;
         let threesalary_el = gen_el(threesalary_link, '去 3Salary 看看 (3salary.com) ');
         node.appendChild(threesalary_el);
-
-        let ursalary_salary_link = 'http://ursalary0.com/salaries/salary_lists_tw/q:' + company_name_shorted_encoded;
-        let ursalary_salary_el = gen_el(ursalary_salary_link, '去 Ursalary (Salary) 看看 (ursalary0.com)');
-        node.appendChild(ursalary_salary_el);
-
-        let ursalary_interview_link = 'http://ursalary0.com/statisfactions/statisfaction_lists_tw/q:' + company_name_shorted_encoded;
-        let ursalary_interview_el = gen_el(ursalary_interview_link, '去 Ursalary (Interview) 看看 (ursalary0.com)');
-        node.appendChild(ursalary_interview_el);
-
-        let ursalary_law_link = 'http://ursalary0.com/lows/low_lists_tw/q:' + company_name_shorted_encoded;
-        let ursalary_law_el = gen_el(ursalary_law_link, '去 Ursalary (Law) 看看 (ursalary0.com)');
-        node.appendChild(ursalary_law_el);
-
-        let ursalary_qa_link = 'http://ursalary0.com/topics/topic_lists_tw/q:' + company_name_shorted_encoded;
-        let ursalary_qa_el = gen_el(ursalary_qa_link, '去 Ursalary (QA) 看看 (ursalary0.com)');
-        node.appendChild(ursalary_qa_el);
     };
 
     let get_company_name_chinese = function(name){
