@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190306.1
+// @version     0.20190307.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -92,6 +92,7 @@
             'cakeresume.com',
             'indeed.com',
             'interview.tw',
+            'recruit.net',
             'salary.tw',
             'wajob.cc',
             'www.ptt.cc',
