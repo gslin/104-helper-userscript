@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190403.0
+// @version     0.20190425.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -87,7 +87,6 @@
         let google_blacklist = [
             '104.com.tw',
             '1111.com.tw',
-            '3salary.com',
             '518.com.tw',
             'cakeresume.com',
             'indeed.com',
@@ -109,10 +108,6 @@
         let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
         node.appendChild(qollie_el);
-
-        let threesalary_link = 'https://3salary.com/search.php?keyword=' + company_name_chinese_rtrim_encoded;
-        let threesalary_el = gen_el(threesalary_link, '去 3Salary 看看 (3salary.com) ');
-        node.appendChild(threesalary_el);
     };
 
     let get_company_name_chinese = function(name){
