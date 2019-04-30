@@ -37,19 +37,20 @@
         let res = await (() => {
             let p = new Promise(resolve => {
                 let data = 'qryCond=' + company_name_chinese_rtrim_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
+                let url = 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do';
 
                 let req = GM_xmlhttpRequest({
                     anonymous: true,
                     data: data,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'Referer': 'https://findbiz.nat.gov.tw/fts/query/QueryBar/queryInit.do',
+                        'Referer': url,
                     },
                     method: 'POST',
                     onload: res => {
                         resolve(res);
                     },
-                    url: 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do',
+                    url: url,
                 });
             });
 
