@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190430.2
+// @version     0.20190430.3
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -62,7 +62,7 @@
 
         if (200 !== res.status) {
             let err_txt = document.createElement('p');
-            err_txt.innerHTML = 'HTTP status = ' + res.status;
+            err_txt.innerHTML = 'Get error (findbiz.nat.gov.tw): "' + res.statusText + '".';
             node.appendChild(err_txt);
             return;
         }
