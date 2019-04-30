@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190430.0
+// @version     0.20190430.1
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -11,10 +11,10 @@
 // @connect     findbiz.nat.gov.tw
 // ==/UserScript==
 
-(function(){
+(() => {
     'use strict';
 
-    let append_links = async function(node, company_name){
+    let append_links = async (node, company_name) => {
         let company_name_chinese = get_company_name_chinese(company_name);
         let company_name_chinese_encoded = encodeURIComponent(company_name_chinese);
 
