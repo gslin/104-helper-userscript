@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190425.0
+// @version     0.20190430.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -34,8 +34,8 @@
 
         node.appendChild(btn);
 
-        let res = await (function(){
-            let p = new Promise(function(resolve){
+        let res = await (() => {
+            let p = new Promise(resolve => {
                 let data = 'qryCond=' + company_name_chinese_rtrim_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
 
                 let req = GM_xmlhttpRequest({
@@ -46,7 +46,7 @@
                         'Referer': 'https://findbiz.nat.gov.tw/fts/query/QueryBar/queryInit.do',
                     },
                     method: 'POST',
-                    onload: function(res){
+                    onload: res => {
                         resolve(res);
                     },
                     url: 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do',
@@ -110,7 +110,7 @@
         node.appendChild(qollie_el);
     };
 
-    let get_company_name_chinese = function(name){
+    let get_company_name_chinese = name => {
         name = name.trim()
             .replace(/\(.*\)/, '')
             .trim()
@@ -122,7 +122,7 @@
         return name.trim();
     };
 
-    let get_company_name_chinese_rtrim = function(name){
+    let get_company_name_chinese_rtrim = name => {
         name = get_company_name_chinese(name);
         name = name.trim()
             .replace(/(台|臺)灣(子|分)公司$/, '')
@@ -132,7 +132,7 @@
         return name;
     };
 
-    let get_company_name_short = function(name){
+    let get_company_name_short = name => {
         name = get_company_name_chinese(name);
         name = name.trim()
             .replace(/^財團法人/, '')
@@ -148,7 +148,7 @@
         return name.trim();
     };
 
-    let gen_el = function(url, text){
+    let gen_el = (url, text) => {
         let el = document.createElement('a');
         el.setAttribute('class', 'helper_outbound_link');
         el.setAttribute('href', url);
@@ -156,13 +156,13 @@
         return el;
     };
 
-    let initial_css = function(){
+    let initial_css = () => {
         let el = document.createElement('style');
         el.innerHTML = '.helper_outbound_link { clear: both; float: left; }';
         document.querySelector('head').appendChild(el);
     };
 
-    let verify_hh = function(node, company_name){
+    let verify_hh = (node, company_name) => {
         let hh_list = [
             'Morgan Philips Hong Kong Limited Taiwan Branch_香港商博禹國際顧問有限公司台灣分公司',
             'ROBERT WALTERS_華德士股份有限公司',
@@ -197,7 +197,7 @@
     };
 
     // Special workaround for 求職小幫手
-    unsafeWindow.open_helper_outbound_links = function(){
+    unsafeWindow.open_helper_outbound_links = () => {
         let links = Array.from(document.getElementsByClassName('helper_outbound_link')).reverse();
         for (let el of links) {
             GM_openInTab(el.getAttribute('href'), {active: false});
@@ -213,7 +213,7 @@
         let company_el = document.querySelector('li.comp_name h1');
 
         // Remove all unnecessary parts
-        company_el.querySelectorAll('a').forEach(function(el){
+        company_el.querySelectorAll('a').forEach(el => {
             el.remove();
         });
 
