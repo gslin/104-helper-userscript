@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190430.3
+// @version     0.20190430.4
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -34,31 +34,27 @@
 
         node.appendChild(btn);
 
-        let res = await (() => {
-            let p = new Promise(resolve => {
-                let data = 'qryCond=' + company_name_chinese_rtrim_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
-                let url = 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do';
+        let res = await new Promise(resolve => {
+            let data = 'qryCond=' + company_name_chinese_rtrim_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
+            let url = 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do';
 
-                let req = GM_xmlhttpRequest({
-                    anonymous: true,
-                    data: data,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Referer': url,
-                    },
-                    method: 'POST',
-                    onerror: res => {
-                        resolve(res);
-                    },
-                    onload: res => {
-                        resolve(res);
-                    },
-                    url: url,
-                });
+            let req = GM_xmlhttpRequest({
+                anonymous: true,
+                data: data,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Referer': url,
+                },
+                method: 'POST',
+                onerror: res => {
+                    resolve(res);
+                },
+                onload: res => {
+                    resolve(res);
+                },
+                url: url,
             });
-
-            return p;
-        })();
+        });
 
         if (200 !== res.status) {
             let err_txt = document.createElement('p');
