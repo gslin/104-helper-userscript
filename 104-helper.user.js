@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190430.1
+// @version     0.20190430.2
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -47,6 +47,9 @@
                         'Referer': url,
                     },
                     method: 'POST',
+                    onerror: res => {
+                        resolve(res);
+                    },
                     onload: res => {
                         resolve(res);
                     },
@@ -56,6 +59,13 @@
 
             return p;
         })();
+
+        if (200 !== res.status) {
+            let err_txt = document.createElement('p');
+            err_txt.innerHTML = 'HTTP status = ' + res.status;
+            node.appendChild(err_txt);
+            return;
+        }
 
         let findbiz_body = document.implementation.createHTMLDocument('');
         findbiz_body.documentElement.innerHTML = res.responseText;
