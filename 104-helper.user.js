@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190430.4
+// @version     0.20190504.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -184,6 +184,7 @@
             '怡東人事顧問股份有限公司',
             '新加坡商立可人事顧問有限公司台灣分公司',
             '新加坡商艾得克有限公司台灣分公司',
+            '益晟人力資源有限公司',
             '立展企管顧問有限公司',
             '立樂高園股份有限公司',
             '精英人力資源股份有限公司',
