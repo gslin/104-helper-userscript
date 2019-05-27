@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190520.0
+// @version     0.20190527.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -241,7 +241,7 @@
     }
 
     // Job page
-    if ('/job/' === pathname) {
+    if (pathname.startsWith('/job/')) {
         initial_css();
 
         let company_el = document.querySelector('span.company a');
