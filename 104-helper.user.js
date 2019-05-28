@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190527.0
+// @version     0.20190528.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -89,6 +89,7 @@
         let ptt_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
         let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
         node.appendChild(ptt_el);
+        preload_link(ptt_link);
 
         let google_blacklist = [
             '104.com.tw',
@@ -110,10 +111,12 @@
         }
         let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
         node.appendChild(google_el);
+        preload_link(google_link);
 
         let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
         let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
         node.appendChild(qollie_el);
+        preload_link(qollie_link);
     };
 
     let get_company_name_chinese = name => {
@@ -166,6 +169,15 @@
         let el = document.createElement('style');
         el.innerHTML = '.helper_outbound_link { clear: both; float: left; }';
         document.querySelector('head').appendChild(el);
+    };
+
+    let preload_link = (url) => {
+        let el = document.createElement('link');
+        el.setAttribute('href', url);
+        el.setAttribute('rel', 'prerender');
+
+        let h = document.querySelector('head');
+        h.appendChild(el);
     };
 
     let verify_hh = (node, company_name) => {
