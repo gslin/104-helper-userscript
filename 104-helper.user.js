@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190528.0
+// @version     0.20190529.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -244,7 +244,7 @@
         base_node.setAttribute('style', 'clear: both; display: table; margin: 0 2em;');
 
         let anchor_el = document.querySelector('#comp_menu');
-        anchor_el.parentElement.insertBefore(base_node, anchor_el);
+        anchor_el.insertAdjacentElement('beforebegin', base_node);
 
         verify_hh(base_node, company_name);
         append_links(base_node, company_name);
@@ -263,7 +263,7 @@
         base_node.setAttribute('style', 'clear: both; display: table; margin: 0 1em;');
 
         let anchor_el = document.querySelector('.holder');
-        anchor_el.parentElement.insertBefore(base_node, anchor_el);
+        anchor_el.insertAdjacentElement('beforebegin', base_node);
 
         verify_hh(base_node, company_name);
 
