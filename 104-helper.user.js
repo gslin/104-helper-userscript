@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190611.0
+// @version     0.20190618.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -183,6 +183,7 @@
     let verify_hh = (node, company_name) => {
         let hh_list = [
             'Arbour Services Limited.',
+            'echoas  Taiwan_愛司人才管理顧問股份有限公司',
             'Morgan Philips Hong Kong Limited Taiwan Branch_香港商博禹國際顧問有限公司台灣分公司',
             'ROBERT WALTERS_華德士股份有限公司',
             '保聖那管理顧問股份有限公司',
