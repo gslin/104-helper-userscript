@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190618.0
+// @version     0.20190620.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -25,6 +25,7 @@
         let company_name_shorted_encoded = encodeURIComponent(company_name_shorted);
 
         let btn = document.createElement('button');
+        btn.setAttribute('accesskey', 'c');
         btn.setAttribute('class', 'btn_open_helper_links');
         btn.setAttribute('style', 'display: block;');
         btn.innerHTML = '打開以下連結 (tabs)';
