@@ -15,7 +15,7 @@ This script will add useful links into 104.com.tw job pages:
 
 ## Accesskey
 
-You can use <kbd>Alt</kbd>-<kbd>Shift</kbd>-<kbd>c</kbd> (in Windows/Linux) to open link tabs.
+You can use <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd> (in Windows/Linux) to open link tabs.
 
 ## License
 
