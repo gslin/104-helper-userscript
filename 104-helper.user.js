@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190620.0
+// @version     0.20190630.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -230,26 +230,35 @@
     let pathname = document.location.pathname;
 
     // Company page
-    if ('/jobbank/custjob/index.php' === pathname) {
-        initial_css();
+    if (pathname.startsWith('/company/')) {
+        let ob = new MutationObserver(() => {
+            let company_el = document.querySelector('h1');
+            if (!company_el) {
+                return;
+            }
+            let company_name = company_el.textContent.trim();
+            if ('' === company_name) {
+                return;
+            }
 
-        let company_el = document.querySelector('li.comp_name h1');
+            let anchor_el = document.querySelectorAll('.col.main')[1];
+            if (!anchor_el) {
+                return;
+            }
 
-        // Remove all unnecessary parts
-        company_el.querySelectorAll('a').forEach(el => {
-            el.remove();
+            initial_css();
+
+            let base_node = document.createElement('div');
+            base_node.setAttribute('style', 'clear: both; display: table; margin: 0 2em;');
+
+            anchor_el.insertAdjacentElement('beforebegin', base_node);
+
+            verify_hh(base_node, company_name);
+            append_links(base_node, company_name);
+
+            ob.disconnect();
         });
-
-        let company_name = company_el.textContent.trim();
-
-        let base_node = document.createElement('div');
-        base_node.setAttribute('style', 'clear: both; display: table; margin: 0 2em;');
-
-        let anchor_el = document.querySelector('#comp_menu');
-        anchor_el.insertAdjacentElement('beforebegin', base_node);
-
-        verify_hh(base_node, company_name);
-        append_links(base_node, company_name);
+        ob.observe(document, {childList: true, subtree: true});
 
         return;
     }
