@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20190904.0
+// @version     0.20200223.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -241,6 +241,7 @@
             if ('' === company_name) {
                 return;
             }
+            console.debug('company_name = ' + company_name);
 
             let anchor_el = document.querySelectorAll('.col.main')[1];
             if (!anchor_el) {
@@ -268,26 +269,38 @@
     if (pathname.startsWith('/job/')) {
         initial_css();
 
-        let company_el = document.querySelector('span.company a');
-        let company_name = company_el.textContent.trim();
+        let ob = new MutationObserver(() => {
+            let company_el = document.querySelector('a[data-gtm-head="公司名稱"]');
+            if (!company_el) {
+                return;
+            }
+            let company_name = company_el.textContent.trim();
+            if ('' === company_name) {
+                return;
+            }
+            console.debug('company_name = ' + company_name);
 
-        let base_node = document.createElement('div');
-        base_node.setAttribute('style', 'clear: both; display: table; margin: 0 1em;');
+            let base_node = document.createElement('div');
+            base_node.setAttribute('style', 'clear: both; display: table; margin: 1em;');
 
-        let anchor_el = document.querySelector('.holder');
-        anchor_el.insertAdjacentElement('beforebegin', base_node);
+            let anchor_el = document.querySelector('.job-header__cont');
+            anchor_el.insertAdjacentElement('afterend', base_node);
 
-        verify_hh(base_node, company_name);
+            verify_hh(base_node, company_name);
 
-        let addr = document.querySelector('dd.addr');
-        if (addr) {
-            let location_el = document.createElement('p');
-            location_el.setAttribute('style', 'clear: both;');
-            location_el.textContent = addr.childNodes[0].textContent;
-            base_node.appendChild(location_el);
-        }
+            let addr = document.querySelector('dd.addr');
+            if (addr) {
+                let location_el = document.createElement('p');
+                location_el.setAttribute('style', 'clear: both;');
+                location_el.textContent = addr.childNodes[0].textContent;
+                base_node.appendChild(location_el);
+            }
 
-        append_links(base_node, company_name);
+            append_links(base_node, company_name);
+
+            ob.disconnect();
+        });
+        ob.observe(document, {childList: true, subtree: true});
 
         return;
     }
