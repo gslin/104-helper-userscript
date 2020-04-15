@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20200223.0
+// @version     0.20200415.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -288,8 +288,9 @@
 
             verify_hh(base_node, company_name);
 
-            let addr = document.querySelector('dd.addr');
+            let addr = document.querySelector('i[data-gtm-content="地圖連結"]');
             if (addr) {
+                addr = addr.parentNode;
                 let location_el = document.createElement('p');
                 location_el.setAttribute('style', 'clear: both;');
                 location_el.textContent = addr.childNodes[0].textContent;
