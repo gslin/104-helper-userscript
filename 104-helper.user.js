@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20230217.0
+// @version     0.20231114.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -68,6 +68,7 @@
             let el = document.createElement('div');
             el.setAttribute('style', 'background: #ddd; margin: 9px 0;');
             el.innerHTML = '<h2 style="display: inline-block; margin: 9px;"><a href="https://findbiz.nat.gov.tw/fts/query/QueryBar/queryInit.do">商工登記公示資料查詢服務</a>資料：</h2>';
+            el.appendChild(document.createTextNode(`(搜尋：${company_name_chinese_rtrim})`));
             for (let item of findbiz_body.querySelectorAll('.panel.panel-default')) {
                 let matches = [];
                 while (matches = item.textContent.match(/\b(\d{7})\b/)) {
