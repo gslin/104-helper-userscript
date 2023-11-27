@@ -15,16 +15,16 @@
     'use strict';
 
     let append_links = async (node, company_name) => {
-        let company_name_chinese = get_company_name_chinese(company_name);
-        let company_name_chinese_encoded = encodeURIComponent(company_name_chinese);
+        const company_name_chinese = get_company_name_chinese(company_name);
+        const company_name_chinese_encoded = encodeURIComponent(company_name_chinese);
 
-        let company_name_chinese_rtrim = get_company_name_chinese_rtrim(company_name);
-        let company_name_chinese_rtrim_encoded = encodeURIComponent(company_name_chinese_rtrim);
+        const company_name_chinese_rtrim = get_company_name_chinese_rtrim(company_name);
+        const company_name_chinese_rtrim_encoded = encodeURIComponent(company_name_chinese_rtrim);
 
-        let company_name_shorted = get_company_name_short(company_name);
-        let company_name_shorted_encoded = encodeURIComponent(company_name_shorted);
+        const company_name_shorted = get_company_name_short(company_name);
+        const company_name_shorted_encoded = encodeURIComponent(company_name_shorted);
 
-        let btn = document.createElement('button');
+        const btn = document.createElement('button');
         btn.setAttribute('accesskey', 'c');
         btn.setAttribute('class', 'btn_open_helper_links');
         btn.setAttribute('style', 'display: block;');
