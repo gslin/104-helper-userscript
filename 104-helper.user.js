@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20231226.0
+// @version     0.20231227.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -195,6 +195,7 @@
             '台灣米高蒲志國際股份有限公司',
             '台灣英創管理顧問股份有限公司',
             '台灣英特艾倫人力資源有限公司',
+            '嘉迅人才管理咨詢有限公司',
             '寶華人力資源顧問股份有限公司',
             '德倫思管理顧問有限公司',
             '怡東人事顧問股份有限公司',
