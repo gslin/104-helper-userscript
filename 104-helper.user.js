@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20240113.0
+// @version     0.20240113.1
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -218,6 +218,7 @@
             '遠誠人力資源顧問股份有限公司',
             '銳光管理顧問有限公司',
             '首席國際獵才有限公司',
+            '香港商唐尼爾森人力資源有限公司台灣分公司',
             '鴻鈺人力資源管理顧問有限公司',
         ];
 
