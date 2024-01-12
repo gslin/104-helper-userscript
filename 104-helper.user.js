@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20231228.1
+// @version     0.20240113.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -215,6 +215,7 @@
             '萬通國際人力開發股份有限公司',
             '藝珂人事顧問股份有限公司',
             '逸亞管理顧問股份有限公司',
+            '遠誠人力資源顧問股份有限公司',
             '銳光管理顧問有限公司',
             '首席國際獵才有限公司',
             '鴻鈺人力資源管理顧問有限公司',
