@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20240408.0
+// @version     0.20240717.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -200,6 +200,7 @@
       '嘉迅人才管理咨詢有限公司',
       '寶華人力資源顧問股份有限公司',
       '巖愷管理顧問有限公司',
+      '康彼斯顧問股份有限公司',
       '德倫思管理顧問有限公司',
       '怡東人事顧問股份有限公司',
       '新加坡商立可人事顧問有限公司台灣分公司',
