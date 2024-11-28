@@ -36,10 +36,10 @@
     node.appendChild(btn);
 
     const res = await new Promise(resolve => {
-      let data = 'qryCond=' + company_name_chinese_rtrim_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
-      let url = 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do';
+      const data = 'qryCond=' + company_name_chinese_rtrim_encoded + '&infoType=D&qryType=cmpyType&cmpyType=true&brCmpyType=&busmType=&factType=&lmtdType=&isAlive=all&busiItemMain=&busiItemSub=&sugCont=&sugEmail=&g-recaptcha-response=';
+      const url = 'https://findbiz.nat.gov.tw/fts/query/QueryList/queryList.do';
 
-      let req = GM_xmlhttpRequest({
+      const req = GM_xmlhttpRequest({
         anonymous: true,
         data: data,
         headers: {
@@ -58,18 +58,18 @@
     });
 
     if (200 !== res.status) {
-      let err_txt = document.createElement('p');
+      const err_txt = document.createElement('p');
       err_txt.innerHTML = 'Get error (findbiz.nat.gov.tw): "' + res.statusText + '".';
       node.appendChild(err_txt);
     } else {
-      let findbiz_body = document.implementation.createHTMLDocument('');
+      const findbiz_body = document.implementation.createHTMLDocument('');
       findbiz_body.documentElement.innerHTML = res.responseText;
 
-      let el = document.createElement('div');
+      const el = document.createElement('div');
       el.setAttribute('style', 'background: #ddd; margin: 9px 0;');
       el.innerHTML = '<h2 style="display: inline-block; margin: 9px;"><a href="https://findbiz.nat.gov.tw/fts/query/QueryBar/queryInit.do">商工登記公示資料查詢服務</a>資料：</h2>';
       el.appendChild(document.createTextNode(`(搜尋：${company_name_chinese_rtrim})`));
-      for (let item of findbiz_body.querySelectorAll('.panel.panel-default')) {
+      for (const item of findbiz_body.querySelectorAll('.panel.panel-default')) {
         let matches = [];
         while (matches = item.textContent.match(/\b(\d{7})\b/)) {
           let company_date = (parseInt(matches[1], 10) + 19110000).toString();
@@ -77,8 +77,8 @@
           item.innerHTML = item.innerHTML.replace(matches[1], company_date);
         }
 
-        for (let a of item.querySelectorAll('a')) {
-          let href = a.getAttribute('href');
+        for (const a of item.querySelectorAll('a')) {
+          const href = a.getAttribute('href');
           if (href.startsWith('/fts')) {
             a.setAttribute('href', 'https://findbiz.nat.gov.tw' + href);
           }
@@ -93,7 +93,7 @@
     node.appendChild(ptt_el);
     preload_link(ptt_link);
 
-    let google_blacklist = [
+    const google_blacklist = [
       '104.com.tw',
       '1111.com.tw',
       '518.com.tw',
@@ -108,15 +108,15 @@
       'yourator.co',
     ];
     let google_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試';
-    for (let site of google_blacklist) {
+    for (const site of google_blacklist) {
       google_link += '+-site:' + site;
     }
-    let google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
+    const google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
     node.appendChild(google_el);
     preload_link(google_link);
 
-    let qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
-    let qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
+    const qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
+    const qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
     node.appendChild(qollie_el);
     preload_link(qollie_link);
   };
