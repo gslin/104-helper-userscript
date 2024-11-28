@@ -88,6 +88,11 @@
       node.appendChild(el);
     }
 
+    const linkedin_link = 'https://www.linkedin.com/search/results/all/?keywords=' + company_name_shorted_encoded;
+    const linkedin_el = gen_el(linkedin_link, '去 LinkedIn 看看 (www.linkedin.com)');
+    node.appendChild(linkedin_el);
+    preload_link(linkedin_link);
+
     const ptt_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
     const ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
     node.appendChild(ptt_el);
