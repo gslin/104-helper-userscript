@@ -88,8 +88,8 @@
       node.appendChild(el);
     }
 
-    let ptt_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
-    let ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
+    const ptt_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
+    const ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
     node.appendChild(ptt_el);
     preload_link(ptt_link);
 
