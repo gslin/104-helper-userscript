@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20241129.0
+// @version     0.20241205.0
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -14,7 +14,7 @@
 (() => {
   'use strict';
 
-  let append_links = async (node, company_name) => {
+  const append_links = async (node, company_name) => {
     const company_name_chinese = get_company_name_chinese(company_name);
     const company_name_chinese_encoded = encodeURIComponent(company_name_chinese);
 
@@ -72,8 +72,8 @@
       for (const item of findbiz_body.querySelectorAll('.panel.panel-default')) {
         let matches = [];
         while (matches = item.textContent.match(/\b(\d{7})\b/)) {
-          let company_date = (parseInt(matches[1], 10) + 19110000).toString();
-          company_date = company_date.substring(0, 4) + '/' + company_date.substring(4, 6) + '/' + company_date.substring(6);
+          const company_date_raw = (parseInt(matches[1], 10) + 19110000).toString();
+          const company_date = company_date_raw.substring(0, 4) + '/' + company_date_raw.substring(4, 6) + '/' + company_date_raw.substring(6);
           item.innerHTML = item.innerHTML.replace(matches[1], company_date);
         }
 
@@ -126,7 +126,7 @@
     preload_link(qollie_link);
   };
 
-  let get_company_name_chinese = name => {
+  const get_company_name_chinese = name => {
     name = name.trim()
       .replace(/\(.*\)/, '')
       .trim()
@@ -138,7 +138,7 @@
     return name.trim();
   };
 
-  let get_company_name_chinese_rtrim = name => {
+  const get_company_name_chinese_rtrim = name => {
     name = get_company_name_chinese(name);
     name = name.trim()
       .replace(/(台|臺)灣(子|分)公司$/, '')
@@ -149,7 +149,7 @@
     return name;
   };
 
-  let get_company_name_short = name => {
+  const get_company_name_short = name => {
     name = get_company_name_chinese(name);
     name = name.trim()
       .replace(/^財團法人/, '')
@@ -166,31 +166,31 @@
     return name.trim();
   };
 
-  let gen_el = (url, text) => {
-    let el = document.createElement('a');
+  const gen_el = (url, text) => {
+    const el = document.createElement('a');
     el.setAttribute('class', 'helper_outbound_link');
     el.setAttribute('href', url);
     el.innerHTML = text;
     return el;
   };
 
-  let initial_css = () => {
-    let el = document.createElement('style');
+  const initial_css = () => {
+    const el = document.createElement('style');
     el.innerHTML = '.helper_outbound_link { clear: both; float: left; }';
     document.querySelector('head').appendChild(el);
   };
 
-  let preload_link = (url) => {
-    let el = document.createElement('link');
+  const preload_link = (url) => {
+    const el = document.createElement('link');
     el.setAttribute('href', url);
     el.setAttribute('rel', 'prerender');
 
-    let h = document.querySelector('head');
+    const h = document.querySelector('head');
     h.appendChild(el);
   };
 
-  let verify_hh = (node, company_name) => {
-    let hh_list = [
+  const verify_hh = (node, company_name) => {
+    const hh_list = [
       'Arbour Services Limited.',
       'echoas  Taiwan_愛司人才管理顧問股份有限公司',
       'Morgan Philips Hong Kong Limited Taiwan Branch_香港商博禹國際顧問有限公司台灣分公司',
@@ -233,7 +233,7 @@
     ];
 
     if (hh_list.indexOf(company_name) >= 0) {
-      let el = document.createElement('div');
+      const el = document.createElement('div');
       el.setAttribute('style', 'color: darkred; font-size: 2em; line-height: 2em;');
       el.innerHTML = '(Company in HeadHunter List)';
       node.appendChild(el);
@@ -242,35 +242,35 @@
 
   // Special workaround for 求職小幫手
   unsafeWindow.open_helper_outbound_links = () => {
-    let links = Array.from(document.getElementsByClassName('helper_outbound_link')).reverse();
+    const links = Array.from(document.getElementsByClassName('helper_outbound_link')).reverse();
     for (let el of links) {
       GM_openInTab(el.getAttribute('href'), {active: false});
     };
   };
 
-  let pathname = document.location.pathname;
+  const pathname = document.location.pathname;
 
   // Company page
   if (pathname.startsWith('/company/')) {
-    let ob = new MutationObserver(() => {
-      let company_el = document.querySelector('h1');
+    const ob = new MutationObserver(() => {
+      const company_el = document.querySelector('h1');
       if (!company_el) {
         return;
       }
-      let company_name = company_el.textContent.trim();
+      const company_name = company_el.textContent.trim();
       if ('' === company_name) {
         return;
       }
       console.debug('company_name = ' + company_name);
 
-      let anchor_el = document.querySelectorAll('.col.main')[1];
+      const anchor_el = document.querySelectorAll('.col.main')[1];
       if (!anchor_el) {
         return;
       }
 
       initial_css();
 
-      let base_node = document.createElement('div');
+      const base_node = document.createElement('div');
       base_node.setAttribute('style', 'clear: both; display: table; padding: 0 1em 1em; width: 100%;');
 
       anchor_el.insertAdjacentElement('beforebegin', base_node);
@@ -289,21 +289,21 @@
   if (pathname.startsWith('/job/')) {
     initial_css();
 
-    let ob = new MutationObserver(() => {
-      let company_el = document.querySelector('a[data-gtm-head="公司名稱"]');
+    const ob = new MutationObserver(() => {
+      const company_el = document.querySelector('a[data-gtm-head="公司名稱"]');
       if (!company_el) {
         return;
       }
-      let company_name = company_el.textContent.trim();
+      const company_name = company_el.textContent.trim();
       if ('' === company_name) {
         return;
       }
       console.debug('company_name = ' + company_name);
 
-      let base_node = document.createElement('div');
+      const base_node = document.createElement('div');
       base_node.setAttribute('style', 'clear: both; display: table; width: 100%;');
 
-      let anchor_el = document.querySelector('.job-header__cont');
+      const anchor_el = document.querySelector('.job-header__cont');
       anchor_el.insertAdjacentElement('afterend', base_node);
 
       verify_hh(base_node, company_name);
@@ -311,7 +311,7 @@
       let addr = document.querySelector('i[data-gtm-content="地圖連結"]');
       if (addr) {
         addr = addr.parentNode;
-        let location_el = document.createElement('p');
+        const location_el = document.createElement('p');
         location_el.setAttribute('style', 'clear: both;');
         location_el.textContent = addr.childNodes[0].textContent;
         base_node.appendChild(location_el);
