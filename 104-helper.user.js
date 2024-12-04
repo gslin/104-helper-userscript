@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20241205.3
+// @version     0.20241205.4
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -15,7 +15,7 @@
   'use strict';
 
   const search_template = 'https://www.google.com/search?q=';
-  const search_domain = search_template.match(/https:\/\/(.*?)\//)[1];
+  const search_domain = search_template.match(/^https:\/\/(.*?)\//)[1];
 
   const append_links = async (node, company_name) => {
     const company_name_chinese = get_company_name_chinese(company_name);
