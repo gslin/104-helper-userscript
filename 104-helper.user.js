@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20241205.2
+// @version     0.20241205.3
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -15,6 +15,7 @@
   'use strict';
 
   const search_template = 'https://www.google.com/search?q=';
+  const search_domain = search_template.match(/https:\/\/(.*?)\//)[1];
 
   const append_links = async (node, company_name) => {
     const company_name_chinese = get_company_name_chinese(company_name);
@@ -96,12 +97,12 @@
     preload_link(linkedin_link);
 
     const linkedin_search_link = search_template + 'site:linkedin.com+' + company_name_shorted_encoded;
-    const linkedin_search_el = gen_el(linkedin_search_link, '去 LinkedIn 看看 (web search)');
+    const linkedin_search_el = gen_el(linkedin_search_link, `去 LinkedIn 看看 (${search_domain})`);
     node.appendChild(linkedin_search_el);
     preload_link(linkedin_search_link);
 
     const ptt_link = search_template + '"' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
-    const ptt_el = gen_el(ptt_link, '去 Ptt 看看 (web search)');
+    const ptt_el = gen_el(ptt_link, `去 Ptt 看看 (${search_domain})`);
     node.appendChild(ptt_el);
     preload_link(ptt_link);
 
@@ -123,7 +124,7 @@
     for (const site of search_blacklist) {
       search_link += '+-site:' + site;
     }
-    const search_el = gen_el(search_link, '去搜尋引擎看看 (web search)');
+    const search_el = gen_el(search_link, `去搜尋引擎看看 (${search_domain})`);
     node.appendChild(search_el);
     preload_link(search_link);
 
