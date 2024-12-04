@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20241205.1
+// @version     0.20241205.2
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -13,6 +13,8 @@
 
 (() => {
   'use strict';
+
+  const search_template = 'https://www.google.com/search?q=';
 
   const append_links = async (node, company_name) => {
     const company_name_chinese = get_company_name_chinese(company_name);
@@ -93,17 +95,17 @@
     node.appendChild(linkedin_el);
     preload_link(linkedin_link);
 
-    const linkedin_google_link = 'https://www.google.com/search?q=site:linkedin.com+' + company_name_shorted_encoded;
-    const linkedin_google_el = gen_el(linkedin_google_link, '去 LinkedIn 看看 (www.google.com)');
-    node.appendChild(linkedin_google_el);
-    preload_link(linkedin_google_link);
+    const linkedin_search_link = search_template + 'site:linkedin.com+' + company_name_shorted_encoded;
+    const linkedin_search_el = gen_el(linkedin_search_link, '去 LinkedIn 看看 (web search)');
+    node.appendChild(linkedin_search_el);
+    preload_link(linkedin_search_link);
 
-    const ptt_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
-    const ptt_el = gen_el(ptt_link, '去 Ptt 看看 (www.google.com)');
+    const ptt_link = search_template + '"' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
+    const ptt_el = gen_el(ptt_link, '去 Ptt 看看 (web search)');
     node.appendChild(ptt_el);
     preload_link(ptt_link);
 
-    const google_blacklist = [
+    const search_blacklist = [
       '104.com.tw',
       '1111.com.tw',
       '518.com.tw',
@@ -117,13 +119,13 @@
       'yes123.com.tw',
       'yourator.co',
     ];
-    let google_link = 'https://www.google.com/search?q="' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試';
-    for (const site of google_blacklist) {
-      google_link += '+-site:' + site;
+    let search_link = search_template + '"' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試';
+    for (const site of search_blacklist) {
+      search_link += '+-site:' + site;
     }
-    const google_el = gen_el(google_link, '去 Google 看看 (www.google.com)');
-    node.appendChild(google_el);
-    preload_link(google_link);
+    const search_el = gen_el(search_link, '去搜尋引擎看看 (web search)');
+    node.appendChild(search_el);
+    preload_link(search_link);
 
     const qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
     const qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
