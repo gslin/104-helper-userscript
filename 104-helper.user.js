@@ -3,18 +3,34 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20241205.5
+// @version     0.20241205.6
 // @license     MIT
+// @grant       GM_addStyle
+// @grant       GM_getValue
 // @grant       GM_openInTab
+// @grant       GM_registerMenuCommand
+// @grant       GM_setValue
 // @grant       GM_xmlhttpRequest
 // @grant       unsafeWindow
+// @require     https://update.greasyfork.org/scripts/395037/764968/MonkeyConfig%20Modern.js
 // @connect     findbiz.nat.gov.tw
 // ==/UserScript==
 
 (() => {
   'use strict';
 
-  const search_template = 'https://www.google.com/search?q=';
+  const cfg = new MonkeyConfig({
+    menuCommand: true,
+    params: {
+      search_template: {
+        type: 'text',
+        default: 'https://www.google.com/search?q=',
+      },
+    },
+    title: '104.com.tw Helper - Configure',
+  });
+
+  const search_template = cfg.get('search_template');
   const search_domain = search_template.match(/^https:\/\/(.*?)\//)[1];
 
   const append_links = async (node, company_name) => {
