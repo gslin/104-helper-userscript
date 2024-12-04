@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/104-helper-userscript
 // @description Add useful links to 104 job pages.
 // @include     https://www.104.com.tw/*
-// @version     0.20241205.4
+// @version     0.20241205.5
 // @license     MIT
 // @grant       GM_openInTab
 // @grant       GM_xmlhttpRequest
@@ -91,21 +91,7 @@
       node.appendChild(el);
     }
 
-    const linkedin_link = 'https://www.linkedin.com/search/results/all/?keywords=' + company_name_shorted_encoded;
-    const linkedin_el = gen_el(linkedin_link, '去 LinkedIn 看看 (www.linkedin.com)');
-    node.appendChild(linkedin_el);
-    preload_link(linkedin_link);
-
-    const linkedin_search_link = search_template + 'site:linkedin.com+' + company_name_shorted_encoded;
-    const linkedin_search_el = gen_el(linkedin_search_link, `去 LinkedIn 看看 (${search_domain})`);
-    node.appendChild(linkedin_search_el);
-    preload_link(linkedin_search_link);
-
-    const ptt_link = search_template + '"' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
-    const ptt_el = gen_el(ptt_link, `去 Ptt 看看 (${search_domain})`);
-    node.appendChild(ptt_el);
-    preload_link(ptt_link);
-
+    /* links */
     const search_blacklist = [
       '104.com.tw',
       '1111.com.tw',
@@ -126,12 +112,26 @@
     }
     const search_el = gen_el(search_link, `去搜尋引擎看看 (${search_domain})`);
     node.appendChild(search_el);
-    preload_link(search_link);
+
+    const mol_link = 'https://announcement.mol.gov.tw/?UNITNAME=' + company_name_chinese_encoded;
+    const mol_el = gen_el(mol_link, '去勞動部看看 (announcement.mol.gov.tw)');
+    node.appendChild(mol_el);
+
+    const linkedin_link = 'https://www.linkedin.com/search/results/all/?keywords=' + company_name_shorted_encoded;
+    const linkedin_el = gen_el(linkedin_link, '去 LinkedIn 看看 (www.linkedin.com)');
+    node.appendChild(linkedin_el);
+
+    const linkedin_search_link = search_template + 'site:linkedin.com+' + company_name_shorted_encoded;
+    const linkedin_search_el = gen_el(linkedin_search_link, `去 LinkedIn 看看 (${search_domain})`);
+    node.appendChild(linkedin_search_el);
+
+    const ptt_link = search_template + '"' + company_name_shorted_encoded + '"+' + company_name_chinese_encoded + '+~面試+site:www.ptt.cc';
+    const ptt_el = gen_el(ptt_link, `去 Ptt 看看 (${search_domain})`);
+    node.appendChild(ptt_el);
 
     const qollie_link = 'https://www.qollie.com/search?keyword=' + company_name_chinese_rtrim_encoded + '&kind=company';
     const qollie_el = gen_el(qollie_link, '去 Qollie 看看 (qollie.com)');
     node.appendChild(qollie_el);
-    preload_link(qollie_link);
   };
 
   const get_company_name_chinese = name => {
@@ -186,15 +186,6 @@
     const el = document.createElement('style');
     el.innerHTML = '.helper_outbound_link { clear: both; float: left; }';
     document.querySelector('head').appendChild(el);
-  };
-
-  const preload_link = (url) => {
-    const el = document.createElement('link');
-    el.setAttribute('href', url);
-    el.setAttribute('rel', 'prerender');
-
-    const h = document.querySelector('head');
-    h.appendChild(el);
   };
 
   const verify_hh = (node, company_name) => {
